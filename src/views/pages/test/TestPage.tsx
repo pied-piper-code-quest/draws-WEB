@@ -10,12 +10,23 @@ const TestPage: FC = () => {
   const navigate = useNavigate();
   const loginUser = useAuthStore((state) => state.loginUser);
   const loginUserWithDiscord = useAuthStore((state) => state.loginUserWithDiscord);
+  const url = useAuthStore((state) => state.url);
 
   const handleSubmit = async (values: LoginFormValues) => {
-    const { email, password } = values;
+    const { username, password } = values;
     try {
-      await loginUser(email, password);
-      navigate('dashboard');
+      await loginUser(username, password);
+      navigate('/dashboard');
+    }
+    catch (err) {
+      console.log('No se pudo autenticar', err)
+    }
+  }
+
+  const handleLoginWithDiscord = async () => {
+    try {
+      await loginUserWithDiscord();
+      if (url) window.location.assign(url);
     }
     catch (err) {
       console.log('No se pudo autenticar', err)
@@ -27,7 +38,6 @@ const TestPage: FC = () => {
       <div className="mx-auto max-w-lg my-auto">
         <Formik
           initialValues={LOGIN_INITIAL_VALUES}
-          // validateOnChange={false}
           validationSchema={LOGIN_VALIDATION_SCHEMA}
           enableReinitialize
           onSubmit={(values) => handleSubmit(values)}
@@ -44,12 +54,12 @@ const TestPage: FC = () => {
                 <label htmlFor="email" className="sr-only">Email</label>
                 <div className="relative">
                   <Input
-                    type="email"
-                    placeholder="E-mail"
-                    id="email"
-                    name="email"
+                    type="text"
+                    placeholder="Username"
+                    id="username"
+                    name="username"
                     className="w-full"
-                    value={values.email}
+                    value={values.username}
                     onChange={handleChange}
                   />
                 </div>
@@ -73,7 +83,7 @@ const TestPage: FC = () => {
               <Button type="submit" className="w-full">
                 Log In
               </Button>
-              <Button className="w-full" onClick={loginUserWithDiscord}>
+              <Button type="button" className="w-full" onClick={handleLoginWithDiscord}>
                 Log In with Discord
               </Button>
 

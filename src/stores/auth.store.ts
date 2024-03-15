@@ -1,13 +1,13 @@
 import { StateCreator, create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { AuthService } from '../services/auth.service';
-import { DiscordUser, User } from '../interfaces/users.interface';
+import { User, UserDiscord } from '../interfaces/users.interface';
 
 export interface AuthState {
-  // authStatus: AuthStatus;
   token?: string;
-  user?: User | DiscordUser;
-  loginUser: (email: string, password: string) => Promise<void>;
+  user?: User | UserDiscord;
+  url?: string,
+  loginUser: (username: string, password: string) => Promise<void>;
   loginUserWithDiscord: () => Promise<void>;
   checkAuthStatus: () => Promise<void>;
   checkDiscordAuthStatus: (code: string) => Promise<void>;
@@ -15,13 +15,13 @@ export interface AuthState {
 }
 
 const storeAPI: StateCreator<AuthState> = (set) => ({
-  // authStatus: 'pending',
   token: undefined,
   user: undefined,
-  loginUser: async (email: string, password: string) => {
+  url: undefined,
+  loginUser: async (username: string, password: string) => {
     try {
-      const { token } = await AuthService.login(email, password);
-      set({  token });
+      const { token, user } = await AuthService.login(username, password);
+      set({ token, user });
     } catch(error) {
       set({ token: undefined });
       throw 'Unauthorized';
@@ -29,37 +29,31 @@ const storeAPI: StateCreator<AuthState> = (set) => ({
   },
   loginUserWithDiscord: async () => {
     try {
-      const { token } = await AuthService.loginWithDiscord();
-      set({  token });
+      const { url } = await AuthService.loginWithDiscord();
+      set({ url });
     } catch(error) {
-      set({ token: undefined });
+      set({ url: undefined });
       throw 'Unauthorized';
     }
   },
   checkDiscordAuthStatus: async (code: string): Promise<void> => {
     try {
-      const { token, ...user } = await AuthService.checkDiscordAthStatus(code);
+      const { token, user } = await AuthService.checkDiscordAthStatus(code);
       set({ token, user })
-      // set({ authStatus: 'authorized', token, user })
-
     } catch (error) {
       set({ user: undefined, token: undefined });
-      // set({ authStatus: 'unauthorized', user: undefined, token: undefined });
     }
   },
   checkAuthStatus: async (): Promise<void> => {
     try {
-      const { token, ...user } = await AuthService.checkStatus();
+      const { token, user } = await AuthService.checkStatus();
       set({ token, user })
-      // set({ authStatus: 'authorized', token, user })
     } catch (error) {
       set({ user: undefined, token: undefined });
-      // set({ authStatus: 'unauthorized', user: undefined, token: undefined });
     }
   },
   logoutUser: () => {
-    set({ user: undefined, token: undefined });
-    // set({ authStatus: 'unauthorized', user: undefined, token: undefined });
+    set({ user: undefined, token: undefined, url: undefined });
   }
 });
 

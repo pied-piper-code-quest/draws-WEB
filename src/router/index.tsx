@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RootPage, TestPage } from '../views/pages';
+import { MiddlewarePage, RootPage, TestPage } from '../views/pages';
 import { PATHS } from '../global';
 
 export const router = createBrowserRouter([
@@ -10,5 +10,13 @@ export const router = createBrowserRouter([
   {
     path: PATHS.TEST,
     element: <TestPage />,
+  },
+  {
+    path: PATHS.AUTH,
+    element: <MiddlewarePage />,
+  },
+  {
+    path: PATHS.DASHBOARD,
+    element: <>Dashboard</>,
   },
 ]);

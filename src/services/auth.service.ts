@@ -1,13 +1,12 @@
 import { AxiosError } from "axios";
 import { drawsApi } from "../apis/drawsApi";
-import { DiscordLoginResponse, LoginResponse } from "../interfaces";
+import { AuthResponse, DiscordUrl } from "../interfaces";
 
 export class AuthService {
-  // ? Login with User Credentials (email & password) - Only for admins
-  static login = async (email: string, password: string): Promise<LoginResponse> => {
+  // ? Login with User Credentials (username & password) - Only for admins
+  static login = async (username: string, password: string): Promise<AuthResponse> => {
     try {
-      const { data } = await drawsApi.post<LoginResponse>('/auth/login', { email, password });
-      // console.log(data);
+      const { data } = await drawsApi.post<AuthResponse>('/auth/login', { username, password });
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
@@ -20,9 +19,9 @@ export class AuthService {
   }
 
   // ? Check the session status - Only for admins
-  static checkStatus = async (): Promise<LoginResponse> => {
+  static checkStatus = async (): Promise<AuthResponse> => {
     try {
-      const { data } = await drawsApi.get<LoginResponse>('/auth/check-status');
+      const { data } = await drawsApi.get<AuthResponse>('/auth/check-status');
       return data;
     } catch(error) {
       console.log(error);
@@ -31,35 +30,30 @@ export class AuthService {
   }
 
   // ? Login with Discord Button SignIn - Only for competitors
-  static loginWithDiscord = async (): Promise<DiscordLoginResponse> => {
+  static loginWithDiscord = async (): Promise<DiscordUrl> => {
     try {
-      const { data } = await drawsApi.post<DiscordLoginResponse>('/auth/oauth-url');
-      // console.log(data);
+      const { data } = await drawsApi.get<DiscordUrl>('/auth/oauth-url');
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
         console.log(err.response?.data);
         throw new Error(err.response?.data);
       }
-      console.log(err)
       throw new Error('Unable to login!')
     }
   }
 
   // ? Check the Discord Session - Only for competitos
-  static checkDiscordAthStatus = async (code: string): Promise<DiscordLoginResponse> => {
+  static checkDiscordAthStatus = async (code: string): Promise<AuthResponse> => {
     if (!code) throw new Error("Missing code");
     try {
-      const { data } = await drawsApi.post(`/auth/oauth-token?code=${code}`);
-      // console.log(data);
+      const { data } = await drawsApi.get(`/auth/oauth-token?code=${code}`);
       return data;
-
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error.response?.data);
         throw new Error(error.response?.data);
       }
-      console.log(error);
       throw new Error("Unable to authenticate");
     }
   }

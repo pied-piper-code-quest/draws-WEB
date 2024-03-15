@@ -1,16 +1,16 @@
 import * as Yup from 'yup';
 
 export interface LoginFormValues {
-  email: string;
+  username: string;
   password: string;
 }
 
 export const LOGIN_INITIAL_VALUES: LoginFormValues = {
-  email: '',
+  username: '',
   password: '',
 }
 
 export const LOGIN_VALIDATION_SCHEMA = Yup.object().shape({
-  email: Yup.string().email('Correo electrónico incorrecto').required('Requerido'),
+  username: Yup.string().required('Requerido'),
   password: Yup.string().required('Requerido'),
 });
