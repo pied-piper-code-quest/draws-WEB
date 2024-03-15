@@ -1,9 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { RootPage } from '../views/pages';
+import { RootPage, TestPage } from '../views/pages';
+import { PATHS } from '../global';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: PATHS.ROOT,
     element: <RootPage />,
+  },
+  {
+    path: PATHS.TEST,
+    element: <TestPage />,
   },
 ]);
