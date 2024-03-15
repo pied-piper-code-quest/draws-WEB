@@ -1,11 +1,15 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { MiddlewarePage, RootPage, TestPage } from '../views/pages';
+import { Navigate, createBrowserRouter } from 'react-router-dom';
+import {
+  MiddlewarePage,
+  // RootPage,
+  TestPage
+} from '../views/pages';
 import { PATHS } from '../global';
 
 export const router = createBrowserRouter([
   {
     path: PATHS.ROOT,
-    element: <RootPage />,
+    element: <Navigate to={PATHS.TEST} />,
   },
   {
     path: PATHS.TEST,
