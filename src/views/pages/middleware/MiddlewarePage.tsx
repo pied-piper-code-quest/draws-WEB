@@ -2,6 +2,8 @@ import { FC, useCallback, useEffect, useRef } from 'react';
 import { useAuthStore } from '../../../stores';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { AuthService } from '../../../services/auth.service';
+import { Loading } from 'react-daisyui';
+import { ROUTES } from '../../../global';
 
 const MiddlewarePage: FC = () => {
   const navigate = useNavigate();
@@ -16,11 +18,11 @@ const MiddlewarePage: FC = () => {
         throw new Error('Unable to authenticate');
       }
       setUserData(token, user);
-      navigate('/dashboard', { replace: true });
+      navigate(`/${ROUTES.DASHBOARD}`, { replace: true });
     }
     catch (error) {
       console.log(error);
-      navigate('/test', { replace: true });
+      navigate(`${ROUTES.LOGIN}`, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -30,11 +32,14 @@ const MiddlewarePage: FC = () => {
     isFetching.current = true;
     const authCode = searchParams.get('code');
     getUserToken(authCode || '');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getUserToken]);
 
   return (
-    <></>
+    <div className="mx-auto flex h-screen flex-row justify-center items-center">
+      <p className="text-center text-2xl text-white font-semibold">Redirigiendo...</p>
+      <Loading size="lg" variant="bars" />
+    </div>
   );
 };
 

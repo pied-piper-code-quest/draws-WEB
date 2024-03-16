@@ -1,26 +1,46 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import {
+  DashboardPage,
+  LoginPage,
   MiddlewarePage,
-  // RootPage,
-  TestPage
 } from '../views/pages';
-import { PATHS } from '../global';
+import { PATHS, ROUTES } from '../global';
+import { AppLayout, AuthLayout } from '../views/layouts';
 
 export const router = createBrowserRouter([
   {
     path: PATHS.ROOT,
-    element: <Navigate to={PATHS.TEST} />,
+    element: <Navigate to={ROUTES.LOGIN} />
   },
   {
-    path: PATHS.TEST,
-    element: <TestPage />,
+    path: PATHS.ROOT,
+    element: <AuthLayout />,
+    children: [
+      {
+        path: PATHS.AUTH,
+        children: [
+          {
+            path: PATHS.ROOT,
+            element: <MiddlewarePage />,
+          },
+          {
+            path: PATHS.LOGIN,
+            element: <LoginPage />,
+          },
+        ]
+      },
+    ]
   },
+
+
   {
-    path: PATHS.AUTH,
-    element: <MiddlewarePage />,
-  },
-  {
-    path: PATHS.DASHBOARD,
-    element: <>Dashboard</>,
+    path: PATHS.ROOT,
+    element: <AppLayout />,
+    children: [
+      {
+        path: PATHS.DASHBOARD,
+        element: <DashboardPage />,
+      },
+    ]
   },
 ]);
