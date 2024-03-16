@@ -4,13 +4,12 @@ import { Button, Input } from 'react-daisyui';
 import { Formik } from 'formik';
 import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from './validations';
 import { useAuthStore } from '../../../stores';
+import { AuthService } from '../../../services/auth.service';
 
 
 const TestPage: FC = () => {
   const navigate = useNavigate();
   const loginUser = useAuthStore((state) => state.loginUser);
-  const loginUserWithDiscord = useAuthStore((state) => state.loginUserWithDiscord);
-  const url = useAuthStore((state) => state.url);
 
   const handleSubmit = async (values: LoginFormValues) => {
     const { username, password } = values;
@@ -25,7 +24,7 @@ const TestPage: FC = () => {
 
   const handleLoginWithDiscord = async () => {
     try {
-      await loginUserWithDiscord();
+      const { url } = await AuthService.loginWithDiscord();
       if (url) window.location.assign(url);
     }
     catch (err) {

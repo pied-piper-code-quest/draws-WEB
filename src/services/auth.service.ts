@@ -47,7 +47,7 @@ export class AuthService {
   static checkDiscordAthStatus = async (code: string): Promise<AuthResponse> => {
     if (!code) throw new Error("Missing code");
     try {
-      const { data } = await drawsApi.get(`/auth/oauth-token?code=${code}`);
+      const { data } = await drawsApi.get<AuthResponse>(`/auth/oauth-token?code=${code}`);
       return data;
     } catch (error) {
       if (error instanceof AxiosError) {
