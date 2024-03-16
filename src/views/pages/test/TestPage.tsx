@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import { Button, Input } from 'react-daisyui';
 import { Formik } from 'formik';
-import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from './validations';
+import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from '../auth/validations';
 import { useAuthStore } from '../../../stores';
 import { AuthService } from '../../../services/auth.service';
 

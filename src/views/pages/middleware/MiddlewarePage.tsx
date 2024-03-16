@@ -20,7 +20,7 @@ const MiddlewarePage: FC = () => {
     }
     catch (error) {
       console.log(error);
-      navigate('/test', { replace: true });
+      navigate('/auth/login', { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
