@@ -1,5 +1,6 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import {
+  DashboardPage,
   LoginPage,
   MiddlewarePage,
 } from '../views/pages';
@@ -36,7 +37,10 @@ export const router = createBrowserRouter([
     path: PATHS.ROOT,
     element: <AppLayout />,
     children: [
-
+      {
+        path: PATHS.DASHBOARD,
+        element: <DashboardPage />,
+      },
     ]
   },
 ]);

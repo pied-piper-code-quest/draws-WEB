@@ -72,7 +72,7 @@ const LoginPage: FC = () => {
                     placeholder="Username"
                     id="username"
                     name="username"
-                    className="w-full bg-white border-[#8D7CFD] text-[#8D7CFD] focus:border-[#8D7CFD] focus:shadow-sm focus:shadow-[#8D7CFD]"
+                    className="w-full bg-white border-2 border-[#8D7CFD] text-[#8D7CFD] focus:border-[#8D7CFD] focus:shadow-sm focus:shadow-[#8D7CFD]"
                     value={values.username}
                     onChange={handleChange}
                   />
@@ -87,7 +87,7 @@ const LoginPage: FC = () => {
                     placeholder="Password"
                     id="password"
                     name="password"
-                    className="w-full bg-white border-[#8D7CFD] text-[#8D7CFD] text=[#8D7CFD] focus:border-[#8D7CFD] focus:shadow-sm focus:shadow-[#8D7CFD]"
+                    className="w-full bg-white border-2 border-[#8D7CFD] text-[#8D7CFD] text=[#8D7CFD] focus:border-[#8D7CFD] focus:shadow-sm focus:shadow-[#8D7CFD]"
                     value={values.password}
                     onChange={handleChange}
                   />

@@ -4,7 +4,6 @@ export enum PATHS {
   AUTH = 'auth',
   LOGIN = 'login',
   DASHBOARD = 'dashboard',
-  TEST = 'test',
 }
 
 export enum ROUTES {
@@ -12,6 +11,4 @@ export enum ROUTES {
   HOME = '/home',
   LOGIN = '/auth/login',
   DASHBOARD = '/dashboard',
-  TEST = '/test',
-
 }
