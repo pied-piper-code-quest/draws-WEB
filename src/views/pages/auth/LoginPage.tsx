@@ -10,6 +10,8 @@ import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from '
 const LoginPage: FC = () => {
   const navigate = useNavigate();
   const loginUser = useAuthStore((state) => state.loginUser);
+  const setIsLoading = useAuthStore((state) => state.setIsLoading);
+  const isLoading = useAuthStore((state) => state.isLoading);
 
   const handleSubmit = async (values: LoginFormValues) => {
     const { username, password } = values;
@@ -24,6 +26,7 @@ const LoginPage: FC = () => {
 
   const handleLoginWithDiscord = async () => {
     try {
+      setIsLoading(true);
       const { url } = await AuthService.loginWithDiscord();
       if (url) window.location.assign(url);
     }
@@ -58,6 +61,7 @@ const LoginPage: FC = () => {
                 startIcon={
                   <i className='bx bxl-discord-alt bx-lg'></i>
                 }
+                disabled={isLoading}
               >
                 Discord
               </Button>
@@ -102,6 +106,7 @@ const LoginPage: FC = () => {
                 color="primary"
                 type="submit"
                 className="w-full"
+                disabled={isLoading}
               >
                 INGRESAR
               </Button>

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Avatar, Divider, Dropdown, Tooltip } from 'react-daisyui';
 import DevTallesLogo from '../../assets/ISO_MONO1.png'
 import { useAuthStore } from '../../../stores';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../global';
 
 const SideNav: FC = () => {
@@ -24,22 +24,28 @@ const SideNav: FC = () => {
           </a>
           <Divider color="primary" />
 
-          <Tooltip position="right" message="Inicio">
-            <button type="button" className="p-1.5 text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  ">
-              <i className='bx bx-home-alt bx-sm'></i>
-            </button>
+          <Tooltip position="right" message="Tablero">
+            <NavLink to={ROUTES.DASHBOARD} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  ">
+              <i className='bx bxs-dashboard bx-sm' />
+            </NavLink>
+          </Tooltip>
+
+          <Tooltip position="right" message="Sorteos">
+            <NavLink to={ROUTES.DRAWS} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg ">
+              <i className='bx bx-customize bx-sm'></i>
+            </NavLink>
           </Tooltip>
 
           <Tooltip position="right" message="Participantes">
-            <button type="button" className="p-1.5 text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg ">
+            <NavLink to={ROUTES.COMPETITORS} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg ">
               <i className='bx bx-group bx-sm'></i>
-            </button>
+            </NavLink>
           </Tooltip>
 
-          <Tooltip position="right" message="Estadísticas">
-            <button type="button" className="p-1.5 text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg">
-              <i className='bx bx-doughnut-chart bx-sm'></i>
-            </button>
+          <Tooltip position="right" message="Administradores">
+            <NavLink to={ROUTES.ADMINS} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg">
+              <i className='bx bx-user-check bx-sm'></i>
+            </NavLink>
           </Tooltip>
         </div>
 
