@@ -2,10 +2,11 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Divider, Input } from 'react-daisyui';
 import { Formik } from 'formik';
+import { ROUTES } from '../../../global';
 import { useAuthStore } from '../../../stores';
 import { AuthService } from '../../../services/auth.service';
-import Wink from '../../assets/wink.png';
 import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from './validations';
+import Wink from '../../assets/wink.png';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const LoginPage: FC = () => {
     const { username, password } = values;
     try {
       await loginUser(username, password);
-      navigate('/dashboard');
+      navigate(ROUTES.ADMIN_DASHBOARD);
     }
     catch (err) {
       console.log('No se pudo autenticar', err)

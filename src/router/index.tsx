@@ -31,10 +31,18 @@ export const router = createBrowserRouter([
       },
     ]
   },
-
-
   {
-    path: PATHS.ROOT,
+    path: PATHS.ADMIN, 
+    element: <AppLayout />,
+    children: [
+      {
+        path: PATHS.DASHBOARD,
+        element: <DashboardPage />,
+      },
+    ]
+  },
+  {
+    path: PATHS.ROOT, 
     element: <AppLayout />,
     children: [
       {
