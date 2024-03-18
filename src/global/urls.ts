@@ -5,12 +5,17 @@ export enum PATHS {
   AUTH = 'auth',
   LOGIN = 'login',
   DASHBOARD = 'dashboard',
+  ADMINS = 'admins',
+  DRAWS = 'draws',
+  COMPETITORS = 'competitors'
 }
 
 export enum ROUTES {
   ROOT = '/',
   HOME = '/home',
   LOGIN = '/auth/login',
-  ADMIN_DASHBOARD = '/admin/dashboard',
   USER_DASHBOARD = '/dashboard',
+  ADMIN_DASHBOARD = '/admins',
+  DRAWS = '/draws',
+  COMPETITORS = '/competitors',
 }
