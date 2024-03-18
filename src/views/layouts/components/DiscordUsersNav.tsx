@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Avatar, Divider, Dropdown, Tooltip } from "react-daisyui";
 import DevTallesLogo from "../../assets/ISO_MONO1.png";
 import { useAuthStore } from "../../../stores";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../global";
 
 const DiscordUsersNav: FC = () => {
@@ -24,12 +24,12 @@ const DiscordUsersNav: FC = () => {
           <Divider color="primary" />
 
           <Tooltip position="right" message="Inicio">
-            <button
-              type="button"
+            <Link
+              to={ROUTES.USER_DASHBOARD}
               className="p-1.5 text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  "
             >
               <i className="bx bx-home-alt bx-sm"></i>
-            </button>
+            </Link>
           </Tooltip>
         </div>
 
