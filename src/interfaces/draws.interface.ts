@@ -16,8 +16,8 @@ export interface DrawData {
   maxDateToJoin: string | null;
   participants: string[] | UserDiscord[];
   winners: string[] | UserDiscord[];
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type DrawsListResponse = ResponseWithPagination<DrawData>;
