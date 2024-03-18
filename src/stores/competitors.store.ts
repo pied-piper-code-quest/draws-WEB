@@ -1,8 +1,6 @@
-import { StateCreator, create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { UserDiscord } from '../interfaces/users.interface';
-
-
+import { StateCreator, create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { UserDiscord } from "../interfaces/users.interface";
 
 export interface CompetitorsState {
   allCompetitors: UserDiscord[];
@@ -13,26 +11,21 @@ export interface CompetitorsState {
   setSelectedCompetitors: (competitors: string[]) => void;
 }
 
-const storeAPI: StateCreator<CompetitorsState> = (set) => ({
+const storeAPI: StateCreator<CompetitorsState> = set => ({
   allCompetitors: [],
   currentCompetitor: undefined,
   selectedCompetitors: [],
   setAllCompetitors: (competitors: UserDiscord[]) => {
-    set({ allCompetitors: competitors })
+    set({ allCompetitors: competitors });
   },
   setSelectedCompetitors: (competitors: string[]) => {
-    set({ selectedCompetitors: competitors })
+    set({ selectedCompetitors: competitors });
   },
   setCurrentCompetitors: (competitor: UserDiscord) => {
-    set({ currentCompetitor: competitor })
+    set({ currentCompetitor: competitor });
   },
 });
 
-export const useCompetitorsStore = create<CompetitorsState>()((
-  devtools(
-    persist(
-      storeAPI,
-      { name: 'competitors-store'}
-    )
-  )
-));
+export const useCompetitorsStore = create<CompetitorsState>()(
+  devtools(persist(storeAPI, { name: "competitors-store" })),
+);

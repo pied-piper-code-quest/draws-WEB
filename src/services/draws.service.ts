@@ -5,7 +5,7 @@ import type { DrawData, DrawsListResponse } from "../interfaces";
 export class DrawsService {
   static getDrawsList = async (
     page?: number,
-    limit?: number
+    limit?: number,
   ): Promise<DrawsListResponse> => {
     try {
       const { data } = await drawsApi.get<DrawsListResponse>("/draws", {

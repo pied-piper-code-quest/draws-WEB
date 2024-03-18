@@ -1,6 +1,6 @@
 import { User, UserDiscord } from "./users.interface";
 
-export type AuthStatus = 'authorized' | 'unauthorized' | 'pending'; 
+export type AuthStatus = "authorized" | "unauthorized" | "pending";
 
 export interface AuthResponse {
   user?: User | UserDiscord;

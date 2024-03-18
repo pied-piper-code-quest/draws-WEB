@@ -11,17 +11,17 @@ interface CompetitorResponse {
 export class CompetitorsService {
   static getAllCompetitors = async (limit: number = 10, page: number = 1) => {
     try {
-      const { data } = await drawsApi.get<CompetitorResponse>(`/users/discord?limit=${limit}&page=${page}`);
+      const { data } = await drawsApi.get<CompetitorResponse>(
+        `/users/discord?limit=${limit}&page=${page}`,
+      );
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
         console.log(err.response?.data);
         throw new Error(err.response?.data);
       }
-      console.log(err)
-      throw new Error('Somethint went wrong!')
+      console.log(err);
+      throw new Error("Somethint went wrong!");
     }
-  }
-
-
+  };
 }

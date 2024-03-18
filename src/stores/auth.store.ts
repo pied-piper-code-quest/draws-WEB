@@ -1,7 +1,7 @@
-import { StateCreator, create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
-import { AuthService } from '../services/auth.service';
-import { User, UserDiscord } from '../interfaces/users.interface';
+import { StateCreator, create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { AuthService } from "../services/auth.service";
+import { User, UserDiscord } from "../interfaces/users.interface";
 
 export interface AuthState {
   token?: string;
@@ -14,45 +14,40 @@ export interface AuthState {
   logoutUser: () => void;
 }
 
-const storeAPI: StateCreator<AuthState> = (set) => ({
+const storeAPI: StateCreator<AuthState> = set => ({
   token: undefined,
   user: undefined,
   isLoading: false,
   loginUser: async (username: string, password: string) => {
-    set({ isLoading: true })
+    set({ isLoading: true });
     try {
       const { token, user } = await AuthService.login(username, password);
       set({ token, user, isLoading: false });
-    } catch(error) {
+    } catch (error) {
       set({ user: undefined, token: undefined, isLoading: false });
-      throw 'Unauthorized';
+      throw "Unauthorized";
     }
   },
   checkAuthStatus: async (): Promise<void> => {
-    set({ isLoading: true })
+    set({ isLoading: true });
     try {
       const { token, user } = await AuthService.checkStatus();
-      set({ token, user, isLoading: false })
+      set({ token, user, isLoading: false });
     } catch (error) {
       set({ user: undefined, token: undefined, isLoading: false });
     }
   },
   setUserData: (token: string, user: User | UserDiscord) => {
-    set({ token, user, isLoading: false })
+    set({ token, user, isLoading: false });
   },
   setIsLoading: (value: boolean) => {
-    set({ isLoading: value })
+    set({ isLoading: value });
   },
   logoutUser: () => {
     set({ user: undefined, token: undefined, isLoading: false });
-  }
+  },
 });
 
-export const useAuthStore = create<AuthState>()((
-  devtools(
-    persist(
-      storeAPI,
-      { name: 'auth-store'}
-    )
-  )
-));
+export const useAuthStore = create<AuthState>()(
+  devtools(persist(storeAPI, { name: "auth-store" })),
+);

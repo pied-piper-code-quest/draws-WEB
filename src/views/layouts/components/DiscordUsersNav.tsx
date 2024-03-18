@@ -7,7 +7,7 @@ import { ROUTES } from "../../../global";
 
 const DiscordUsersNav: FC = () => {
   const navigate = useNavigate();
-  const logoutUser = useAuthStore((state) => state.logoutUser);
+  const logoutUser = useAuthStore(state => state.logoutUser);
 
   const handleLogout = () => {
     logoutUser();

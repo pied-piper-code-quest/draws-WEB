@@ -1,44 +1,46 @@
-import { FC } from 'react';
-import EmptyLogo from '../../assets/death.png';
-import DashboardCard from './components/DashboardCard';
+import { FC } from "react";
+import EmptyLogo from "../../assets/death.png";
+import DashboardCard from "./components/DashboardCard";
 
 const isEmpty: boolean = false;
 
 const cards = [
   {
     id: 1,
-    title: 'Sorteo Membresías',
-    label: 'Participantes',
+    title: "Sorteo Membresías",
+    label: "Participantes",
     value: 200,
-    date: 'Creado 2 de Dic 2024',
-    status: 'coming-soon',
+    date: "Creado 2 de Dic 2024",
+    status: "coming-soon",
   },
   {
     id: 2,
-    title: 'Sorteo Membresías',
-    label: 'Participantes',
+    title: "Sorteo Membresías",
+    label: "Participantes",
     value: 150,
-    date: 'Creado 2 de Dic 2024',
-    status: 'active',
+    date: "Creado 2 de Dic 2024",
+    status: "active",
   },
   {
     id: 3,
-    title: 'Sorteo Membresías',
-    label: 'Participantes',
+    title: "Sorteo Membresías",
+    label: "Participantes",
     value: 300,
-    date: 'Creado 2 de Dic 2024',
-    status: 'done',
+    date: "Creado 2 de Dic 2024",
+    status: "done",
   },
-]
+];
 
 const DashboardPage: FC = () => {
   if (isEmpty) {
     return (
       <div className="flex flex-col items-center mt-72">
-        <h3 className="text-gray-400 font-semibold text-3xl">Aún no tienes sorteos programados</h3>
+        <h3 className="text-gray-400 font-semibold text-3xl">
+          Aún no tienes sorteos programados
+        </h3>
         <img className="w-40 h-auto mt-6 opacity-35" src={EmptyLogo} alt="" />
       </div>
-    )
+    );
   }
   return (
     <>

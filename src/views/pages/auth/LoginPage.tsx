@@ -1,51 +1,55 @@
-import { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Divider, Input } from 'react-daisyui';
-import { Formik } from 'formik';
-import { ROUTES } from '../../../global';
-import { useAuthStore } from '../../../stores';
-import { AuthService } from '../../../services/auth.service';
-import { LOGIN_INITIAL_VALUES, LOGIN_VALIDATION_SCHEMA, LoginFormValues } from './validations';
-import Wink from '../../assets/wink.png';
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Divider, Input } from "react-daisyui";
+import { Formik } from "formik";
+import { ROUTES } from "../../../global";
+import { useAuthStore } from "../../../stores";
+import { AuthService } from "../../../services/auth.service";
+import {
+  LOGIN_INITIAL_VALUES,
+  LOGIN_VALIDATION_SCHEMA,
+  LoginFormValues,
+} from "./validations";
+import Wink from "../../assets/wink.png";
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
-  const loginUser = useAuthStore((state) => state.loginUser);
-  const setIsLoading = useAuthStore((state) => state.setIsLoading);
-  const isLoading = useAuthStore((state) => state.isLoading);
+  const loginUser = useAuthStore(state => state.loginUser);
+  const setIsLoading = useAuthStore(state => state.setIsLoading);
+  const isLoading = useAuthStore(state => state.isLoading);
 
   const handleSubmit = async (values: LoginFormValues) => {
     const { username, password } = values;
     try {
       await loginUser(username, password);
       navigate(ROUTES.ADMIN_DASHBOARD);
+    } catch (err) {
+      console.log("No se pudo autenticar", err);
     }
-    catch (err) {
-      console.log('No se pudo autenticar', err)
-    }
-  }
+  };
 
   const handleLoginWithDiscord = async () => {
     try {
       setIsLoading(true);
       const { url } = await AuthService.loginWithDiscord();
       if (url) window.location.assign(url);
+    } catch (err) {
+      console.log("No se pudo autenticar", err);
     }
-    catch (err) {
-      console.log('No se pudo autenticar', err)
-    }
-  }
+  };
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-white mb-3">Aplicación de Sorteos</h1>
+      <h1 className="text-3xl font-bold text-white mb-3">
+        Aplicación de Sorteos
+      </h1>
       <img src={Wink} width={150} height={150} />
       <div className="w-12/12 md:w-3/12 bg-white rounded-xl">
         <Formik
           initialValues={LOGIN_INITIAL_VALUES}
           validationSchema={LOGIN_VALIDATION_SCHEMA}
           enableReinitialize
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={values => handleSubmit(values)}
         >
           {({
             values,
@@ -53,15 +57,18 @@ const LoginPage: FC = () => {
             handleChange,
             handleSubmit,
           }) => (
-            <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-              <p className="text-center text-2xl text-black font-semibold">Iniciar Sesión</p>
+            <form
+              onSubmit={handleSubmit}
+              className="mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+            >
+              <p className="text-center text-2xl text-black font-semibold">
+                Iniciar Sesión
+              </p>
               <Button
                 type="button"
                 className="bg-indigo-500 hover:bg-indigo-700 text-white mb-2 w-full btn-lg text-lg"
                 onClick={handleLoginWithDiscord}
-                startIcon={
-                  <i className='bx bxl-discord-alt bx-lg'></i>
-                }
+                startIcon={<i className="bx bxl-discord-alt bx-lg"></i>}
                 disabled={isLoading}
               >
                 Discord
@@ -72,7 +79,9 @@ const LoginPage: FC = () => {
               </Divider>
               <div className="h-0.5" />
               <div>
-                <label htmlFor="email" className="sr-only">Email</label>
+                <label htmlFor="email" className="sr-only">
+                  Email
+                </label>
                 <div className="relative">
                   <Input
                     className="w-full text-secondary mb-2 border-2 placeholder:text-secondary"
@@ -88,7 +97,9 @@ const LoginPage: FC = () => {
               </div>
 
               <div>
-                <label htmlFor="password" className="sr-only">Password</label>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
                 <div className="relative">
                   <Input
                     className="w-full text-secondary mb-2 border-2 placeholder:text-secondary"

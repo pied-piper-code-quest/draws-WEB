@@ -1,7 +1,5 @@
-import { FC, useState } from 'react';
-import { Button, Pagination, Table } from 'react-daisyui';
-
-
+import { FC, useState } from "react";
+import { Button, Pagination, Table } from "react-daisyui";
 
 export interface ColumnType<T> {
   name: string;
@@ -16,16 +14,22 @@ interface DataTableProps<T> {
   currentPage?: number;
   pageSize?: number;
   onChangePage?: (page: number) => void;
-
 }
 
-const DataTable: FC<DataTableProps<any>> = ({ data, columns, pagination, currentPage, pageSize, onChangePage }) => {
-  const [pageCount, setPageCount] = useState<number>(1)
+const DataTable: FC<DataTableProps<any>> = ({
+  data,
+  columns,
+  pagination,
+  currentPage,
+  pageSize,
+  onChangePage,
+}) => {
+  const [pageCount, setPageCount] = useState<number>(1);
 
   if (pageSize && currentPage) {
     const pageTotal = Math.ceil(data.length / pageSize);
     if (pageTotal > 1) {
-      setPageCount(pageTotal)
+      setPageCount(pageTotal);
     }
   }
 
@@ -41,8 +45,10 @@ const DataTable: FC<DataTableProps<any>> = ({ data, columns, pagination, current
         <Table.Body>
           {data.map((item, index: number) => (
             <Table.Row key={index}>
-              {columns.map((column) => {
-                const renderContent = column.cell ? column.cell(item) : item[column.key];
+              {columns.map(column => {
+                const renderContent = column.cell
+                  ? column.cell(item)
+                  : item[column.key];
                 return <span key={column.key}>{renderContent}</span>;
               })}
             </Table.Row>

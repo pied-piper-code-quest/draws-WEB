@@ -1,10 +1,7 @@
-import { FC } from 'react';
-
+import { FC } from "react";
 
 const CompetitorsPage: FC = () => {
-  return (
-    <div>CompetitorsPage</div>
-  );
+  return <div>CompetitorsPage</div>;
 };
 
 export default CompetitorsPage;

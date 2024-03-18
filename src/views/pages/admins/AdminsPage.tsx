@@ -1,9 +1,7 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 const AdminsPage: FC = () => {
-  return (
-    <div>AdminsPage</div>
-  );
+  return <div>AdminsPage</div>;
 };
 
 export default AdminsPage;
