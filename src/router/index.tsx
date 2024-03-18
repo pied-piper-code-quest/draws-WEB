@@ -1,11 +1,12 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom';
 import {
   DashboardPage,
+  UserDashboardPage,
   LoginPage,
   MiddlewarePage,
 } from '../views/pages';
 import { PATHS, ROUTES } from '../global';
-import { AppLayout, AuthLayout } from '../views/layouts';
+import { AppLayout, AuthLayout, UserLayout } from '../views/layouts';
 
 export const router = createBrowserRouter([
   {
@@ -43,11 +44,11 @@ export const router = createBrowserRouter([
   },
   {
     path: PATHS.ROOT, 
-    element: <AppLayout />,
+    element: <UserLayout />,
     children: [
       {
         path: PATHS.DASHBOARD,
-        element: <DashboardPage />,
+        element: <UserDashboardPage />,
       },
     ]
   },

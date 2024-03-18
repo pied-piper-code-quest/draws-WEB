@@ -9,31 +9,40 @@ const MiddlewarePage: FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const isFetching = useRef(false);
+
+  const token = useAuthStore((state) => state.token);
   const setUserData = useAuthStore((state) => state.setUserData);
 
   const getUserToken = useCallback(async (code: string) => {
-    try {
       const { token, user } = await AuthService.checkDiscordAthStatus(code);
       if (!token || !user) {
         throw new Error('Unable to authenticate');
       }
       setUserData(token, user);
-      navigate(`/${ROUTES.USER_DASHBOARD}`, { replace: true });
-    }
-    catch (error) {
-      console.log(error);
-      navigate(`${ROUTES.LOGIN}`, { replace: true });
-    }
+      navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (isFetching.current) return;
-    isFetching.current = true;
+    if (token) {
+      navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
+      return;
+    }
     const authCode = searchParams.get('code');
-    getUserToken(authCode || '');
+    try {
+      if (!authCode) throw new Error("Code not provided")
+  
+      if (isFetching.current) return;
+      isFetching.current = true;
+      
+      getUserToken(authCode);
+      
+    } catch (error) {
+      console.log(error);
+      navigate(`${ROUTES.LOGIN}`, { replace: true });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getUserToken]);
+  }, [getUserToken, token]);
 
   return (
     <div className="mx-auto flex h-screen flex-row justify-center items-center">
