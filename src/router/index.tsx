@@ -11,7 +11,7 @@ import {
 } from "../views/pages";
 import { PATHS, ROUTES } from "../global";
 import {
-  AppLayout,
+  AdminLayout,
   AuthLayout,
   PrivateRoutesLayout,
   UserLayout,
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: PATHS.ADMIN,
-        element: <AppLayout />,
+        element: <AdminLayout />,
         children: [
           {
             path: PATHS.DASHBOARD,

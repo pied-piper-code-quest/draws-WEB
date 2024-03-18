@@ -16,7 +16,8 @@ export enum ROUTES {
   HOME = "/home",
   LOGIN = "/auth/login",
   USER_DASHBOARD = "/dashboard",
-  ADMIN_DASHBOARD = "/admin/admins",
+  ADMIN_DASHBOARD = "/admin/dashboard",
+  ADMINS = "/admin/admins",
   DRAWS = "/admin/draws",
   COMPETITORS = "/admin/competitors",
 }

@@ -52,7 +52,7 @@ const SideNav: FC = () => {
 
           <Tooltip position="right" message="Administradores">
             <NavLink
-              to={ROUTES.ADMIN_DASHBOARD}
+              to={ROUTES.ADMINS}
               className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg"
             >
               <i className="bx bx-user-check bx-sm"></i>
