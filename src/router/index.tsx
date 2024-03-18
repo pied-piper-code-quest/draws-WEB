@@ -2,7 +2,6 @@ import { Navigate, createBrowserRouter } from "react-router-dom";
 import {
   AdminsPage,
   CompetitorsPage,
-  DashboardPage,
   AdminDrawsPage,
   UserDashboardPage,
   LoginPage,
@@ -51,10 +50,6 @@ export const router = createBrowserRouter([
         children: [
           {
             path: PATHS.DASHBOARD,
-            element: <DashboardPage />,
-          },
-          {
-            path: PATHS.DRAWS,
             element: <AdminDrawsPage />,
           },
           {

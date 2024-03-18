@@ -3,21 +3,21 @@ import { Badge, Button, Modal } from "react-daisyui";
 import { DataTable } from "../../common";
 import { ColumnType } from "../../common/DataTable";
 import { useDrawsStore } from "../../../stores";
-// import { DrawsService } from '../../../services/draws.service';
 import { DrawData } from "../../../interfaces/draws.interface";
 import DrawForm from "./components/DrawForm";
+import { DrawsService } from "../../../services/draws.service";
 
 const statusColor: { [x: string]: string } = {
   pending: "warning",
-  progress: "info",
-  done: "success",
-  cancel: "error",
+  live: "info",
+  finished: "success",
+  canceled: "error",
 };
 const statusLabel: { [x: string]: string } = {
   pending: "Pendiente",
-  progress: "En Progreso",
-  done: "Completado",
-  cancel: "Cancelado",
+  live: "En Vivo",
+  finished: "Completado",
+  canceled: "Cancelado",
 };
 
 const DrawsPage: FC = () => {
@@ -39,9 +39,10 @@ const DrawsPage: FC = () => {
 
   const getDraws = useCallback(async () => {
     try {
-      // const draws = await DrawsService.getAllDraws(limit, currentPage);
-      // setCurrentPage(draws.currentPage);
-      // setAllDraws(draws.data);
+      const draws = await DrawsService.getDrawsList(currentPage, limit);
+      console.log(currentPage);
+      setCurrentPage(draws.currentPage);
+      setAllDraws(draws.data);
     } catch (err) {
       setAllDraws([]);
       console.log(err);
@@ -92,12 +93,8 @@ const DrawsPage: FC = () => {
       name: "Acciones",
       cell: (_row: DrawData) => (
         <>
-          <Button color="info" className="ms-2">
-            Editar
-          </Button>
-          <Button color="error" className="ms-2">
-            Eliminar
-          </Button>
+          <Button className="ms-2 bg-devtalles-400 text-white">Editar</Button>
+          <Button className="ms-2 bg-red-500 text-white">Eliminar</Button>
         </>
       ),
     },

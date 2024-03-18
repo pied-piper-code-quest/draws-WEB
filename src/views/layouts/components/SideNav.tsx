@@ -32,15 +32,6 @@ const SideNav: FC = () => {
             </NavLink>
           </Tooltip>
 
-          <Tooltip position="right" message="Sorteos">
-            <NavLink
-              to={ROUTES.DRAWS}
-              className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg "
-            >
-              <i className="bx bx-customize bx-sm"></i>
-            </NavLink>
-          </Tooltip>
-
           <Tooltip position="right" message="Participantes">
             <NavLink
               to={ROUTES.COMPETITORS}

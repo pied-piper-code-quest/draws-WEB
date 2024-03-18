@@ -6,7 +6,6 @@ export enum PATHS {
   LOGIN = "login",
   DASHBOARD = "dashboard",
   ADMINS = "admins",
-  DRAWS = "draws",
   COMPETITORS = "competitors",
   DRAW_ID = "draw/:id",
 }
@@ -18,6 +17,5 @@ export enum ROUTES {
   USER_DASHBOARD = "/dashboard",
   ADMIN_DASHBOARD = "/admin/dashboard",
   ADMINS = "/admin/admins",
-  DRAWS = "/admin/draws",
   COMPETITORS = "/admin/competitors",
 }
