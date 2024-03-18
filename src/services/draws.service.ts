@@ -21,6 +21,19 @@ export class DrawsService {
       throw new Error("Unknown error");
     }
   };
+  static createDraw = async (draw: DrawData) => {
+    try {
+      const { data } = await drawsApi.post<DrawData>(`/draws/manage`, draw);
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+        throw new Error(err.response?.data);
+      }
+      console.log(err);
+      throw new Error("Somethint went wrong!");
+    }
+  };
 
   static subscribeToDraw = async (id: string): Promise<DrawData> => {
     try {
