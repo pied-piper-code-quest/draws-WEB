@@ -36,7 +36,7 @@ export class AuthService {
   };
 
   // ? Login with Discord Button SignIn - Only for competitors
-  static loginWithDiscord = async (): Promise<DiscordUrl> => {
+  static getDiscordOAuthUrl = async (): Promise<DiscordUrl> => {
     try {
       const { data } = await drawsApi.get<DiscordUrl>("/auth/oauth-url");
       return data;

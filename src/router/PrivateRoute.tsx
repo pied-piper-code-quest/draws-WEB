@@ -8,10 +8,10 @@ interface PrivateRouteProps {
 }
 
 export const PrivateRoute: FC<PrivateRouteProps> = ({ children }) => {
-  const { user } = useAuthStore.getState();
+  const { authData } = useAuthStore.getState();
   const location = useLocation();
 
-  if (user === null || undefined) {
+  if (!authData) {
     return (
       <Navigate to={`${ROUTES.LOGIN}`} state={{ from: location }} replace />
     );

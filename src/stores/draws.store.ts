@@ -12,10 +12,10 @@ export interface DrawsState {
 const storeAPI: StateCreator<DrawsState> = set => ({
   allDraws: [],
   currentDraw: undefined,
-  setAllDraws: (draws: DrawData[]) => {
+  setAllDraws: draws => {
     set({ allDraws: draws });
   },
-  setCurrentDraw: (draw: DrawData) => {
+  setCurrentDraw: draw => {
     set({ currentDraw: draw });
   },
 });

@@ -8,11 +8,10 @@ import { useAuthStore } from "../../../stores";
 import { WEBSOCKETS_MESSAGES } from "../../../global/constants";
 
 const UserDashboardPage: FC = () => {
-  const user = useAuthStore(state => state.user);
-  const token = useAuthStore(state => state.token);
+  const authData = useAuthStore(state => state.authData)!;
   const { draws, isLoading, getDraws, subscribeToDraw } = useGetDraws();
   useEffect(() => {
-    const socket = connectToWebsocket(token || "");
+    const socket = connectToWebsocket(authData.token || "");
     socket.on(WEBSOCKETS_MESSAGES.REFRESH_DRAWS_LIST, () => {
       getDraws();
     });
@@ -45,7 +44,7 @@ const UserDashboardPage: FC = () => {
             <DrawCard
               key={draw.id}
               {...draw}
-              userId={user?.id!}
+              userId={authData.user.id!}
               handleOnClick={subscribeToDraw}
             />
           ))}

@@ -15,13 +15,13 @@ const storeAPI: StateCreator<CompetitorsState> = set => ({
   allCompetitors: [],
   currentCompetitor: undefined,
   selectedCompetitors: [],
-  setAllCompetitors: (competitors: UserDiscord[]) => {
+  setAllCompetitors: competitors => {
     set({ allCompetitors: competitors });
   },
-  setSelectedCompetitors: (competitors: string[]) => {
+  setSelectedCompetitors: competitors => {
     set({ selectedCompetitors: competitors });
   },
-  setCurrentCompetitors: (competitor: UserDiscord) => {
+  setCurrentCompetitors: competitor => {
     set({ currentCompetitor: competitor });
   },
 });

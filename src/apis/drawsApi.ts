@@ -7,7 +7,7 @@ const drawsApi = axios.create({
 });
 
 drawsApi.interceptors.request.use(config => {
-  const token = useAuthStore.getState().token;
+  const token = useAuthStore.getState().authData?.token;
   if (token) {
     config.headers["Authorization"] = `Bearer ${token}`;
   }

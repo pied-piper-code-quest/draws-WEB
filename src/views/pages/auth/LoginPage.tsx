@@ -14,16 +14,19 @@ import Wink from "../../assets/wink.png";
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
-  const loginUser = useAuthStore(state => state.loginUser);
+  const setAuthData = useAuthStore(state => state.setAuthData);
   const setIsLoading = useAuthStore(state => state.setIsLoading);
   const isLoading = useAuthStore(state => state.isLoading);
 
   const handleSubmit = async (values: LoginFormValues) => {
     const { username, password } = values;
     try {
-      await loginUser(username, password);
+      setIsLoading(true);
+      const { token, user } = await AuthService.login(username, password);
+      setAuthData({ token, user, userType: "admin" });
       navigate(ROUTES.ADMIN_DASHBOARD);
     } catch (err) {
+      setAuthData(null);
       console.log("No se pudo autenticar", err);
     }
   };
@@ -31,7 +34,7 @@ const LoginPage: FC = () => {
   const handleLoginWithDiscord = async () => {
     try {
       setIsLoading(true);
-      const { url } = await AuthService.loginWithDiscord();
+      const { url } = await AuthService.getDiscordOAuthUrl();
       if (url) window.location.assign(url);
     } catch (err) {
       console.log("No se pudo autenticar", err);

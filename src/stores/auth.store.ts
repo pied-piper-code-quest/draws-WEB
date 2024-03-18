@@ -1,50 +1,33 @@
 import { StateCreator, create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { AuthService } from "../services/auth.service";
-import { User, UserDiscord } from "../interfaces/users.interface";
+import type { User, UserDiscord } from "../interfaces/users.interface";
 
+type AuthData = {
+  token: string;
+  user: User | UserDiscord;
+  userType: "admin" | "discord";
+};
 export interface AuthState {
-  token?: string;
-  user?: User | UserDiscord;
+  authData: AuthData | null;
   isLoading: boolean;
-  loginUser: (username: string, password: string) => Promise<void>;
-  checkAuthStatus: () => Promise<void>;
-  setUserData: (token: string, user: User | UserDiscord) => void;
+  setAuthData: (userData: AuthData | null) => void;
+
   setIsLoading: (value: boolean) => void;
   logoutUser: () => void;
 }
 
 const storeAPI: StateCreator<AuthState> = set => ({
-  token: undefined,
-  user: undefined,
+  authData: null,
   isLoading: false,
-  loginUser: async (username: string, password: string) => {
-    set({ isLoading: true });
-    try {
-      const { token, user } = await AuthService.login(username, password);
-      set({ token, user, isLoading: false });
-    } catch (error) {
-      set({ user: undefined, token: undefined, isLoading: false });
-      throw "Unauthorized";
-    }
+  setAuthData: userData => {
+    set({ authData: userData, isLoading: false });
   },
-  checkAuthStatus: async (): Promise<void> => {
-    set({ isLoading: true });
-    try {
-      const { token, user } = await AuthService.checkStatus();
-      set({ token, user, isLoading: false });
-    } catch (error) {
-      set({ user: undefined, token: undefined, isLoading: false });
-    }
-  },
-  setUserData: (token: string, user: User | UserDiscord) => {
-    set({ token, user, isLoading: false });
-  },
+
   setIsLoading: (value: boolean) => {
     set({ isLoading: value });
   },
   logoutUser: () => {
-    set({ user: undefined, token: undefined, isLoading: false });
+    set({ authData: null, isLoading: false });
   },
 });
 

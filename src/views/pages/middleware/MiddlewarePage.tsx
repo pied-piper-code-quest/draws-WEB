@@ -10,21 +10,21 @@ const MiddlewarePage: FC = () => {
   const [searchParams] = useSearchParams();
   const isFetching = useRef(false);
 
-  const token = useAuthStore(state => state.token);
-  const setUserData = useAuthStore(state => state.setUserData);
+  const authData = useAuthStore(state => state.authData);
+  const setAuthData = useAuthStore(state => state.setAuthData);
 
   const getUserToken = useCallback(async (code: string) => {
     const { token, user } = await AuthService.checkDiscordAthStatus(code);
     if (!token || !user) {
       throw new Error("Unable to authenticate");
     }
-    setUserData(token, user);
+    setAuthData({ token, user, userType: "discord" });
     navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (token) {
+    if (authData) {
       navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
       return;
     }
@@ -41,7 +41,7 @@ const MiddlewarePage: FC = () => {
       navigate(`${ROUTES.LOGIN}`, { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getUserToken, token]);
+  }, [getUserToken, authData]);
 
   return (
     <div className="mx-auto flex h-screen flex-row justify-center items-center">
