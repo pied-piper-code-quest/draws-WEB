@@ -11,6 +11,7 @@ export interface User {
 
 export interface UserDiscord {
   id: string;
+  discordId: string;
   username: string;
   avatar: string;
   discriminator: string;

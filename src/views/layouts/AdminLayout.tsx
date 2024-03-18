@@ -15,7 +15,7 @@ const AdminLayout: FC = () => {
     <div className="h-screen w-full bg-gray-200">
       <div className="flex">
         <SideNav />
-        <div className="p-6 px-10 w-full">
+        <div className="p-4 md:p-6 md:px-10 w-full">
           <PrivateRoute>
             <Outlet />
           </PrivateRoute>

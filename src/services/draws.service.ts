@@ -21,6 +21,19 @@ export class DrawsService {
       throw new Error("Unknown error");
     }
   };
+  static getDrawById = async (id: string): Promise<DrawData> => {
+    try {
+      const { data } = await drawsApi.get<DrawData>(`/draws/${id}`);
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+        throw new Error(err.response?.data);
+      }
+      console.log(err);
+      throw new Error("Unknown error");
+    }
+  };
   static createDraw = async (draw: DrawData) => {
     try {
       const { data } = await drawsApi.post<DrawData>(`/draws/manage`, draw);

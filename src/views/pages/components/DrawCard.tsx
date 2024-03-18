@@ -5,7 +5,6 @@ import type { DrawData, DrawStatus } from "../../../interfaces";
 
 interface Props extends DrawData {
   userId: string;
-  // handleOnClick: (id: string, title: string) => void;
   handleOnClick: (drawData: DrawData) => void;
 }
 export function DrawCard({ handleOnClick, ...props }: Props) {
@@ -16,7 +15,7 @@ export function DrawCard({ handleOnClick, ...props }: Props) {
           <Card.Title tag="h3" className="text-devtalles-600 mb-2">
             {props.title}
           </Card.Title>
-          <p className="text-3xl mb-0.5">
+          <p className="text-lg md:text-3xl mb-0.5">
             {props.participants.length} Participante
             {props.participants.length !== 1 && "s"}
           </p>

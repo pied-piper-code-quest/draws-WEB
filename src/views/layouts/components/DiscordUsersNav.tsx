@@ -4,10 +4,13 @@ import DevTallesLogo from "../../assets/ISO_MONO1.png";
 import { useAuthStore } from "../../../stores";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../global";
+import { UserDiscord } from "../../../interfaces/users.interface";
 
 const DiscordUsersNav: FC = () => {
   const navigate = useNavigate();
   const logoutUser = useAuthStore(state => state.logoutUser);
+  const authData = useAuthStore(state => state.authData)!;
+  console.log(authData);
 
   const handleLogout = () => {
     logoutUser();
@@ -35,13 +38,24 @@ const DiscordUsersNav: FC = () => {
 
         <Dropdown vertical="top" horizontal="right">
           <Dropdown.Toggle button={false}>
-            <Avatar
-              className="cursor-pointer"
-              shape="circle"
-              src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              online
-              size="xs"
-            />
+            {(authData.user as UserDiscord).discordId &&
+            (authData.user as UserDiscord).avatar ? (
+              <Avatar
+                className="cursor-pointer"
+                shape="circle"
+                src={`https://cdn.discordapp.com/avatars/${(authData.user as UserDiscord).discordId}/${(authData.user as UserDiscord).avatar}.webp?size=160`}
+                online
+                size="xs"
+              />
+            ) : (
+              <Avatar
+                className="cursor-pointer"
+                shape="circle"
+                src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                online
+                size="xs"
+              />
+            )}
           </Dropdown.Toggle>
           <Dropdown.Menu className="w-52">
             <Dropdown.Item onClick={handleLogout}>LogOut</Dropdown.Item>
