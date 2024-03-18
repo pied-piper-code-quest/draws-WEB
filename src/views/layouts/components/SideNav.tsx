@@ -25,7 +25,7 @@ const SideNav: FC = () => {
           <Divider color="primary" />
 
           <Tooltip position="right" message="Tablero">
-            <NavLink to={ROUTES.DASHBOARD} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  ">
+            <NavLink to={ROUTES.USER_DASHBOARD} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  ">
               <i className='bx bxs-dashboard bx-sm' />
             </NavLink>
           </Tooltip>
@@ -43,7 +43,7 @@ const SideNav: FC = () => {
           </Tooltip>
 
           <Tooltip position="right" message="Administradores">
-            <NavLink to={ROUTES.ADMINS} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg">
+            <NavLink to={ROUTES.ADMIN_DASHBOARD} className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg">
               <i className='bx bx-user-check bx-sm'></i>
             </NavLink>
           </Tooltip>
