@@ -4,11 +4,12 @@ import {
   CompetitorsPage,
   DashboardPage,
   DrawsPage,
+  UserDashboardPage,
   LoginPage,
   MiddlewarePage,
 } from '../views/pages';
 import { PATHS, ROUTES } from '../global';
-import { AppLayout, AuthLayout } from '../views/layouts';
+import { AppLayout, AuthLayout, UserLayout } from '../views/layouts';
 
 export const router = createBrowserRouter([
   {
@@ -46,11 +47,11 @@ export const router = createBrowserRouter([
   },
   {
     path: PATHS.ROOT, 
-    element: <AppLayout />,
+    element: <UserLayout />,
     children: [
       {
         path: PATHS.DASHBOARD,
-        element: <DashboardPage />,
+        element: <UserDashboardPage />,
       },
       {
         path: PATHS.DRAWS,

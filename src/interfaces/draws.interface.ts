@@ -1,18 +1,23 @@
+import { ResponseWithPagination } from "./response-with-pagination.interface";
+import { UserDiscord } from "./users.interface";
 
+export type DrawStatus = "pending" | "live" | "finished" | "canceled";
 
-export interface Draw {
+export interface DrawData {
   id: string;
   title: string;
   description: string;
-  status: string;
+  createdBy: string;
+  status: DrawStatus;
   available: boolean;
-  maxParticipants: null;
+  maxParticipants: number | null;
   numberOfWinners: number;
   prizes: string[];
-  resultDate: string;
-  maxDateToJoin: string;
-  participants: string[];
-  winners: string[];
+  maxDateToJoin: string | null;
+  participants: string[] | UserDiscord[];
+  winners: string[] | UserDiscord[];
   createdAt?: string;
   updatedAt?: string;
 }
+
+export type DrawsListResponse = ResponseWithPagination<DrawData>;
