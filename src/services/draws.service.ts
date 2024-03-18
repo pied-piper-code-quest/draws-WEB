@@ -42,7 +42,7 @@ export class DrawsService {
     } catch (err) {
       if (err instanceof AxiosError) {
         console.log(err.response?.data);
-        throw new Error(err.response?.data);
+        throw new Error(err.response?.data?.message);
       }
       console.log(err);
       throw new Error("Unknown error");

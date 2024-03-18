@@ -5,7 +5,8 @@ import type { DrawData, DrawStatus } from "../../../interfaces";
 
 interface Props extends DrawData {
   userId: string;
-  handleOnClick: (id: string, title: string) => void;
+  // handleOnClick: (id: string, title: string) => void;
+  handleOnClick: (drawData: DrawData) => void;
 }
 export function DrawCard({ handleOnClick, ...props }: Props) {
   return (
@@ -39,9 +40,9 @@ export function DrawCard({ handleOnClick, ...props }: Props) {
               <button
                 type="button"
                 className="devtalles-button"
-                onClick={() => handleOnClick(props.id, props.title)}
+                onClick={() => handleOnClick(props)}
               >
-                Inscribirse
+                Ver Detalles
               </button>
             )
           )}
