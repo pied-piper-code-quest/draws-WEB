@@ -1,7 +1,7 @@
-import { Card } from "react-daisyui";
-import { DrawData, DrawStatus } from "../../../interfaces";
-import { DateFormatter } from ".";
 import { Link } from "react-router-dom";
+import { Card } from "react-daisyui";
+import { DateFormatter } from "./";
+import type { DrawData, DrawStatus } from "../../../interfaces";
 
 interface Props extends DrawData {
   userId: string;

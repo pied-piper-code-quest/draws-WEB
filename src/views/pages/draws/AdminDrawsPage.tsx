@@ -3,7 +3,7 @@ import { Badge, Button, Modal } from 'react-daisyui';
 import { DataTable } from '../../common';
 import { ColumnType } from '../../common/DataTable';
 import { useDrawsStore } from '../../../stores';
-import { DrawsService } from '../../../services/draws.service';
+// import { DrawsService } from '../../../services/draws.service';
 import { DrawData } from '../../../interfaces/draws.interface';
 import DrawForm from './components/DrawForm';
 
@@ -92,7 +92,7 @@ const DrawsPage: FC = () => {
     {
       key: 'actions',
       name: 'Acciones',
-      cell: (row: DrawData) => (
+      cell: (_row: DrawData) => (
         <>
           <Button color="info" className="ms-2">
             Editar

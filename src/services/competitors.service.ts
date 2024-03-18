@@ -1,6 +1,5 @@
 import { AxiosError } from "axios";
 import { drawsApi } from "../apis/drawsApi";
-import { Draw } from "../interfaces/draws.interface";
 import { UserDiscord } from "../interfaces/users.interface";
 
 interface CompetitorResponse {

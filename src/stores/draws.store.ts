@@ -1,21 +1,21 @@
 import { StateCreator, create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { Draw } from '../interfaces/draws.interface';
+import { DrawData } from '../interfaces/draws.interface';
 
 export interface DrawsState {
-  allDraws: Draw[];
-  currentDraw?: Draw;
-  setAllDraws: (draws: Draw[]) => void;
-  setCurrentDraw: (draw: Draw) => void;
+  allDraws: DrawData[];
+  currentDraw?: DrawData;
+  setAllDraws: (draws: DrawData[]) => void;
+  setCurrentDraw: (draw: DrawData) => void;
 }
 
 const storeAPI: StateCreator<DrawsState> = (set) => ({
   allDraws: [],
   currentDraw: undefined,
-  setAllDraws: (draws: Draw[]) => {
+  setAllDraws: (draws: DrawData[]) => {
     set({ allDraws: draws })
   },
-  setCurrentDraw: (draw: Draw) => {
+  setCurrentDraw: (draw: DrawData) => {
     set({ currentDraw: draw })
   },
 });
