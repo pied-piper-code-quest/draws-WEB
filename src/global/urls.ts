@@ -1,5 +1,6 @@
 export enum PATHS {
   ROOT = '',
+  ADMIN = 'admin',
   HOME = 'home',
   AUTH = 'auth',
   LOGIN = 'login',
@@ -13,8 +14,8 @@ export enum ROUTES {
   ROOT = '/',
   HOME = '/home',
   LOGIN = '/auth/login',
-  DASHBOARD = '/dashboard',
-  ADMINS = '/admins',
+  USER_DASHBOARD = '/dashboard',
+  ADMIN_DASHBOARD = '/admins',
   DRAWS = '/draws',
-  COMPETITORS = '/competitors'
+  COMPETITORS = '/competitors',
 }

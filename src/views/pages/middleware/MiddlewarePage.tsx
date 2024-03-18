@@ -18,7 +18,7 @@ const MiddlewarePage: FC = () => {
         throw new Error('Unable to authenticate');
       }
       setUserData(token, user);
-      navigate(`${ROUTES.DASHBOARD}`, { replace: true });
+      navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
     }
     catch (error) {
       console.log(error);
