@@ -4,6 +4,7 @@ import {
   UserDashboardPage,
   LoginPage,
   MiddlewarePage,
+  DrawPage,
 } from '../views/pages';
 import { PATHS, ROUTES } from '../global';
 import { AppLayout, AuthLayout, UserLayout } from '../views/layouts';
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: PATHS.DASHBOARD,
         element: <UserDashboardPage />,
+      },
+      {
+        path: PATHS.DRAW_ID,
+        element: <DrawPage />,
       },
     ]
   },

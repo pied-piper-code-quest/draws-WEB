@@ -5,6 +5,7 @@ export enum PATHS {
   AUTH = 'auth',
   LOGIN = 'login',
   DASHBOARD = 'dashboard',
+  DRAW_ID = 'draw/:id',
 }
 
 export enum ROUTES {
