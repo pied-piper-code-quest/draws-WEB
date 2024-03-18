@@ -7,7 +7,8 @@ export enum PATHS {
   DASHBOARD = 'dashboard',
   ADMINS = 'admins',
   DRAWS = 'draws',
-  COMPETITORS = 'competitors'
+  COMPETITORS = 'competitors',
+  DRAW_ID = 'draw/:id',
 }
 
 export enum ROUTES {
