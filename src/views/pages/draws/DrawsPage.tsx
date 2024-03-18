@@ -25,6 +25,7 @@ const DrawsPage: FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const allDraws = useDrawsStore((state) => state.allDraws);
   const setAllDraws = useDrawsStore((state) => state.setAllDraws);
+  
   const [currentStep, setCurrentStep] = useState<number>(1);
 
   
@@ -93,10 +94,10 @@ const DrawsPage: FC = () => {
       name: 'Acciones',
       cell: (row: Draw) => (
         <>
-          <Button>
+          <Button color="info" className="ms-2">
             Editar
           </Button>
-          <Button>
+          <Button color="error" className="ms-2">
             Eliminar
           </Button>
         </>
@@ -123,7 +124,7 @@ const DrawsPage: FC = () => {
       </div>
       <Modal ref={ref} className={`${currentStep > 1 ? 'w-12/12 max-w-5xl' : ''}`}>
         <form method="dialog">
-          <Button size="sm" color="ghost" shape="circle" className="absolute right-2 top-2">
+          <Button size="sm" color="ghost" shape="circle" className="absolute right-2 top-2" onClick={() => setCurrentStep(1)}>
             x
           </Button>
         </form>

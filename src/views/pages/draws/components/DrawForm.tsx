@@ -2,6 +2,9 @@ import { FC, useState } from 'react';
 import { Button, Input, Textarea, Divider } from 'react-daisyui';
 import { Field, FieldArray, Formik, Form } from 'formik';
 import { DRAW_INITIAL_VALUES, DRAW_VALIDATION_SCHEMA, DrawFormValues } from './validations';
+import CompetitorList from './CompetitorList';
+import { useCompetitorsStore } from '../../../../stores';
+import { DrawsService } from '../../../../services/draws.service';
 
 interface DrawFormProps {
   currentStep: number;
@@ -9,11 +12,10 @@ interface DrawFormProps {
 }
 
 const DrawForm: FC<DrawFormProps> = ({ currentStep, handleCurrentStep }) => {
+  const selectedCompetitors = useCompetitorsStore((state) => state.selectedCompetitors);
 
-
-  const handleSubmit = (values: DrawFormValues) => {
-    console.log(values);
-
+  const handleSubmit = async (values: DrawFormValues) => {
+    await DrawsService.createDraw({ ...values, participants: selectedCompetitors })
   }
 
   return (
@@ -114,54 +116,33 @@ const DrawForm: FC<DrawFormProps> = ({ currentStep, handleCurrentStep }) => {
                   </div>
                 </div>
 
-                <div className="flex justify-between items-start">
-                  <p>No. de Premios</p>
+                <div className="flex justify-between items-stary">
+                  <p className="text-[#6131D1] text-xl"> Premios</p>
                   <div>
                     <FieldArray
                       name="prizes"
-                      render={(arrayHelpers) => (
+                      render={() => (
                         <>
-                          {values.prizes && values.prizes.length > 0 ? (
-                            values.prizes.map((prize, index) => (
-                              <div key={index} className="flex justify-end items-center mb-2">
-                                <Field name={`prizes.${index}`}>
-                                  {({ field }) => (
-                                    <div>
-                                      <label htmlFor={`prizes.${index}`} className="sr-only">Premio {index + 1}</label>
-                                      <div className="relative">
-                                        <Input
-                                          {...field}
-                                          placeholder={`Premio ${index + 1}`}
-                                          className="w-full text-secondary border-2 placeholder:text-secondary"
-                                          color="secondary"
-                                          type="text"
-                                          defaultValue=""
-                                        />
-                                      </div>
+                          {values.numberOfWinners > 0 && Array.from(Array(values.numberOfWinners).keys()).map((price: number) => (
+                            <div key={price}>
+                              <Field name={`prizes.${price}`} defaultValue="">
+                                {({ field }) => (
+                                  <div>
+                                    <label htmlFor={`prizes.${price}`} className="sr-only">Premio {price + 1}</label>
+                                    <div className="relative">
+                                      <Input
+                                        {...field}
+                                        placeholder={`Premio ${price + 1}`}
+                                        className="w-full text-secondary mb-2 border-2 placeholder:text-secondary"
+                                        color="secondary"
+                                        type="text"
+                                      />
                                     </div>
-                                  )}
-                                </Field>
-                                <Button
-                                  type="button"
-                                  className="ms-1"
-                                  onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                                >
-                                  -
-                                </Button>
-                                <Button
-                                  className="ms-1"
-                                  type="button"
-                                  onClick={() => arrayHelpers.insert(index, '')}
-                                >
-                                  +
-                                </Button>
-                              </div>
-                            ))
-                          ) : (
-                            <Button type="button" onClick={() => arrayHelpers.push('')}>
-                              Add a Prize
-                            </Button>
-                          )}
+                                  </div>
+                                )}
+                              </Field>
+                            </div>
+                          ))}
                         </>
                       )}
                     />
@@ -171,15 +152,20 @@ const DrawForm: FC<DrawFormProps> = ({ currentStep, handleCurrentStep }) => {
               <Divider horizontal />
               <div className="w-1/2">
                 <div>
-                  <p>Participantes</p>
-
+                  <p className="text-[#6131D1]">Participantes</p>
+                  <CompetitorList />
+                </div>
+                <div className="flex justify-end mt-3">
+                  <Button
+                    color="primary"
+                    type="submit"
+                  >
+                    FINALIZAR
+                  </Button>
                 </div>
               </div>
-
             </div>
           )}
-
-
         </Form>
       )}
     </Formik>

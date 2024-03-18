@@ -13,6 +13,6 @@ export interface Draw {
   maxDateToJoin: string;
   participants: string[];
   winners: string[];
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
