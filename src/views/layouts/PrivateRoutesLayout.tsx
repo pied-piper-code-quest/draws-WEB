@@ -25,7 +25,7 @@ const PrivateRoutesLayout: FC = () => {
   };
   useEffect(() => {
     verifySessionStatus();
-  }, [authData]);
+  }, []);
 
   if (!isAuthorized) return null;
   return <Outlet />;
