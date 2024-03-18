@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { drawsApi } from "../apis/drawsApi";
-import { DrawsListResponse } from "../interfaces";
+import type { DrawData, DrawsListResponse } from "../interfaces";
 
 export class DrawsService {
   static getDrawsList = async (
@@ -11,6 +11,20 @@ export class DrawsService {
       const { data } = await drawsApi.get<DrawsListResponse>("/draws", {
         params: { limit, page },
       });
+      return data;
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        console.log(err.response?.data);
+        throw new Error(err.response?.data);
+      }
+      console.log(err);
+      throw new Error("Unknown error");
+    }
+  };
+
+  static subscribeToDraw = async (id: string): Promise<DrawData> => {
+    try {
+      const { data } = await drawsApi.post<DrawData>(`/draws/subscribe/${id}`);
       return data;
     } catch (err) {
       if (err instanceof AxiosError) {
