@@ -14,11 +14,11 @@ const MiddlewarePage: FC = () => {
   const setAuthData = useAuthStore(state => state.setAuthData);
 
   const getUserToken = useCallback(async (code: string) => {
-    const { token, user } = await AuthService.checkDiscordAthStatus(code);
+    const { token, user } = await AuthService.checkDiscordAuthStatus(code);
     if (!token || !user) {
       throw new Error("Unable to authenticate");
     }
-    setAuthData({ token, user, userType: "discord" });
+    setAuthData({ user, userType: "discord" }, token);
     navigate(`${ROUTES.USER_DASHBOARD}`, { replace: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

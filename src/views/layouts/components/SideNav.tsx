@@ -25,7 +25,7 @@ const SideNav: FC = () => {
 
           <Tooltip position="right" message="Tablero">
             <NavLink
-              to={ROUTES.USER_DASHBOARD}
+              to={ROUTES.ADMIN_DASHBOARD}
               className="p-1.5 flex justify-center items-center text-[#A6A1FF] hover:bg-[#ffffff]/[.15] focus:active:bg-[#ffffff]/[.15] focus:outline-nones transition-colors duration-200 rounded-lg  "
             >
               <i className="bx bxs-dashboard bx-sm" />

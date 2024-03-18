@@ -23,10 +23,10 @@ const LoginPage: FC = () => {
     try {
       setIsLoading(true);
       const { token, user } = await AuthService.login(username, password);
-      setAuthData({ token, user, userType: "admin" });
+      setAuthData({ user, userType: "admin" }, token);
       navigate(ROUTES.ADMIN_DASHBOARD);
     } catch (err) {
-      setAuthData(null);
+      setAuthData(null, null);
       console.log("No se pudo autenticar", err);
     }
   };

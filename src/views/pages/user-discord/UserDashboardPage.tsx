@@ -9,9 +9,10 @@ import { WEBSOCKETS_MESSAGES } from "../../../global/constants";
 
 const UserDashboardPage: FC = () => {
   const authData = useAuthStore(state => state.authData)!;
+  const token = useAuthStore(state => state.token);
   const { draws, isLoading, getDraws, subscribeToDraw } = useGetDraws();
   useEffect(() => {
-    const socket = connectToWebsocket(authData.token || "");
+    const socket = connectToWebsocket(token || "");
     socket.on(WEBSOCKETS_MESSAGES.REFRESH_DRAWS_LIST, () => {
       getDraws();
     });

@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
 import { drawsApi } from "../apis/drawsApi";
-import { AuthResponse, DiscordUrl } from "../interfaces";
+import { AuthResponse, DiscordUrl, VerifyTokenResponse } from "../interfaces";
 
 export class AuthService {
   // ? Login with User Credentials (username & password) - Only for admins
@@ -24,17 +24,6 @@ export class AuthService {
     }
   };
 
-  // ? Check the session status - Only for admins
-  static checkStatus = async (): Promise<AuthResponse> => {
-    try {
-      const { data } = await drawsApi.get<AuthResponse>("/auth/check-status");
-      return data;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Unauthorized");
-    }
-  };
-
   // ? Login with Discord Button SignIn - Only for competitors
   static getDiscordOAuthUrl = async (): Promise<DiscordUrl> => {
     try {
@@ -50,7 +39,7 @@ export class AuthService {
   };
 
   // ? Check the Discord Session - Only for competitos
-  static checkDiscordAthStatus = async (
+  static checkDiscordAuthStatus = async (
     code: string,
   ): Promise<AuthResponse> => {
     if (!code) throw new Error("Missing code");
@@ -65,6 +54,17 @@ export class AuthService {
         throw new Error(error.response?.data);
       }
       throw new Error("Unable to authenticate");
+    }
+  };
+
+  static checkAuthStatus = async (): Promise<VerifyTokenResponse> => {
+    try {
+      const { data } =
+        await drawsApi.get<VerifyTokenResponse>("/auth/verify-token");
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Unauthorized");
     }
   };
 }

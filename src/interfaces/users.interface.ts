@@ -1,3 +1,5 @@
+export type UserType = "admin" | "discord";
+
 export interface User {
   id: string;
   username: string;

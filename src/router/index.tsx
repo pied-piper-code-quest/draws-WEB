@@ -10,7 +10,12 @@ import {
   DrawPage,
 } from "../views/pages";
 import { PATHS, ROUTES } from "../global";
-import { AppLayout, AuthLayout, UserLayout } from "../views/layouts";
+import {
+  AppLayout,
+  AuthLayout,
+  PrivateRoutesLayout,
+  UserLayout,
+} from "../views/layouts";
 
 export const router = createBrowserRouter([
   {
@@ -37,38 +42,44 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: PATHS.ADMIN,
-    element: <AppLayout />,
-    children: [
-      {
-        path: PATHS.DASHBOARD,
-        element: <DashboardPage />,
-      },
-      {
-        path: PATHS.DRAWS,
-        element: <AdminDrawsPage />,
-      },
-      {
-        path: PATHS.COMPETITORS,
-        element: <CompetitorsPage />,
-      },
-      {
-        path: PATHS.ADMINS,
-        element: <AdminsPage />,
-      },
-    ],
-  },
-  {
     path: PATHS.ROOT,
-    element: <UserLayout />,
+    element: <PrivateRoutesLayout />,
     children: [
       {
-        path: PATHS.DASHBOARD,
-        element: <UserDashboardPage />,
+        path: PATHS.ADMIN,
+        element: <AppLayout />,
+        children: [
+          {
+            path: PATHS.DASHBOARD,
+            element: <DashboardPage />,
+          },
+          {
+            path: PATHS.DRAWS,
+            element: <AdminDrawsPage />,
+          },
+          {
+            path: PATHS.COMPETITORS,
+            element: <CompetitorsPage />,
+          },
+          {
+            path: PATHS.ADMINS,
+            element: <AdminsPage />,
+          },
+        ],
       },
       {
-        path: PATHS.DRAW_ID,
-        element: <DrawPage />,
+        path: PATHS.ROOT,
+        element: <UserLayout />,
+        children: [
+          {
+            path: PATHS.DASHBOARD,
+            element: <UserDashboardPage />,
+          },
+          {
+            path: PATHS.DRAW_ID,
+            element: <DrawPage />,
+          },
+        ],
       },
     ],
   },
